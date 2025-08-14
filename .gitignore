@@ -1,0 +1,36 @@
+# Large dataset files (must be downloaded separately)
+# Direct download from: http://bdd-data.berkeley.edu/download.html (no registration required)
+datasets/bdd100k_images_100k.zip
+datasets/bdd100k_labels.zip
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Generated data (created during demo runs)
+data/bdd100k/100k/
+
+# Evidence logs (generated during each demo run)
+evidence_logs/*.json
+evidence_logs/*.txt
+
+# Note: blockchain/crypto-config/ and blockchain/channel-artifacts/ are REQUIRED
+# These contain pre-generated certificates and network configuration needed for demo

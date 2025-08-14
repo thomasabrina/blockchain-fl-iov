@@ -1,0 +1,40 @@
+# ============================================================================
+# Blockchain-Enhanced Federated Learning for IoV - Demo Dependencies
+# ============================================================================
+# This file contains ALL dependencies needed to run complete_from_scratch_demo.py
+# No additional installations required - everything is included here.
+
+# Core Machine Learning Framework
+tensorflow>=2.13.0,<3.0.0
+numpy>=1.24.0,<2.0.0
+scipy>=1.10.0,<2.0.0
+
+# Cryptography and Security (for blockchain and model encryption)
+cryptography>=41.0.0,<42.0.0
+pycryptodome>=3.18.0,<4.0.0
+
+# Data Processing and Visualization
+pandas>=2.0.0,<3.0.0
+matplotlib>=3.7.0,<4.0.0
+pillow>=10.0.0,<11.0.0
+
+# System Monitoring and Utilities
+psutil>=5.9.0,<6.0.0
+tqdm>=4.65.0,<5.0.0
+
+# HTTP Requests (for blockchain communication)
+requests>=2.31.0,<3.0.0
+
+# SUMO Traffic Simulation (optional - demo works without it)
+# Note: SUMO will be auto-installed by the demo if not present
+# sumo>=1.18.0  # Commented out - auto-installed by demo
+
+# Development and Debugging
+click>=8.1.0,<9.0.0
+
+# ============================================================================
+# Installation Notes:
+# 1. Run: pip install -r requirements.txt
+# 2. Then run: python3 complete_from_scratch_demo.py
+# 3. The demo will auto-install any missing system dependencies (Docker, SUMO)
+# ============================================================================

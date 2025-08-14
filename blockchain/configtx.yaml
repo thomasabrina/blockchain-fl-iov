@@ -1,0 +1,199 @@
+Capabilities:
+  Channel: &ChannelCapabilities
+    V2_0: true
+  Orderer: &OrdererCapabilities
+    V2_0: true
+  Application: &ApplicationCapabilities
+    V2_0: true
+
+Application: &ApplicationDefaults
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    LifecycleEndorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+    Endorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+  Capabilities:
+    <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+  OrdererType: etcdraft
+  Addresses:
+    - orderer0.vehicular-fl.com:7050
+    - orderer1.vehicular-fl.com:7050
+    - orderer2.vehicular-fl.com:7050
+  EtcdRaft:
+    Consenters:
+    - Host: orderer0.vehicular-fl.com
+      Port: 7050
+      ClientTLSCert: crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer0.vehicular-fl.com/tls/server.crt
+      ServerTLSCert: crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer0.vehicular-fl.com/tls/server.crt
+    - Host: orderer1.vehicular-fl.com
+      Port: 7050
+      ClientTLSCert: crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer1.vehicular-fl.com/tls/server.crt
+      ServerTLSCert: crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer1.vehicular-fl.com/tls/server.crt
+    - Host: orderer2.vehicular-fl.com
+      Port: 7050
+      ClientTLSCert: crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer2.vehicular-fl.com/tls/server.crt
+      ServerTLSCert: crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer2.vehicular-fl.com/tls/server.crt
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    BlockValidation:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+  Capabilities:
+    <<: *OrdererCapabilities
+
+Channel: &ChannelDefaults
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+  Capabilities:
+    <<: *ChannelCapabilities
+Organizations:
+- &OrdererOrg
+  Name: OrdererMSP
+  ID: OrdererMSP
+  MSPDir: crypto-config/ordererOrganizations/vehicular-fl.com/msp
+  Policies:
+    Readers:
+      Type: Signature
+      Rule: "OR('OrdererMSP.member')"
+    Writers:
+      Type: Signature
+      Rule: "OR('OrdererMSP.member')"
+    Admins:
+      Type: Signature
+      Rule: "OR('OrdererMSP.admin')"
+
+- &RSU1
+  Name: RSU1MSP
+  ID: RSU1MSP
+  MSPDir: crypto-config/peerOrganizations/rsu1.vehicular-fl.com/msp
+  Policies:
+    Readers:
+      Type: Signature
+      Rule: "OR('RSU1MSP.admin', 'RSU1MSP.peer', 'RSU1MSP.client')"
+    Writers:
+      Type: Signature
+      Rule: "OR('RSU1MSP.admin', 'RSU1MSP.client')"
+    Admins:
+      Type: Signature
+      Rule: "OR('RSU1MSP.admin')"
+    Endorsement:
+      Type: Signature
+      Rule: "OR('RSU1MSP.peer')"
+  AnchorPeers:
+  - Host: peer0.rsu1.vehicular-fl.com
+    Port: 7051
+
+- &RSU2
+  Name: RSU2MSP
+  ID: RSU2MSP
+  MSPDir: crypto-config/peerOrganizations/rsu2.vehicular-fl.com/msp
+  Policies:
+    Readers:
+      Type: Signature
+      Rule: "OR('RSU2MSP.admin', 'RSU2MSP.peer', 'RSU2MSP.client')"
+    Writers:
+      Type: Signature
+      Rule: "OR('RSU2MSP.admin', 'RSU2MSP.client')"
+    Admins:
+      Type: Signature
+      Rule: "OR('RSU2MSP.admin')"
+    Endorsement:
+      Type: Signature
+      Rule: "OR('RSU2MSP.peer')"
+  AnchorPeers:
+  - Host: peer0.rsu2.vehicular-fl.com
+    Port: 7051
+
+- &RSU3
+  Name: RSU3MSP
+  ID: RSU3MSP
+  MSPDir: crypto-config/peerOrganizations/rsu3.vehicular-fl.com/msp
+  Policies:
+    Readers:
+      Type: Signature
+      Rule: "OR('RSU3MSP.admin', 'RSU3MSP.peer', 'RSU3MSP.client')"
+    Writers:
+      Type: Signature
+      Rule: "OR('RSU3MSP.admin', 'RSU3MSP.client')"
+    Admins:
+      Type: Signature
+      Rule: "OR('RSU3MSP.admin')"
+    Endorsement:
+      Type: Signature
+      Rule: "OR('RSU3MSP.peer')"
+  AnchorPeers:
+  - Host: peer0.rsu3.vehicular-fl.com
+    Port: 7051
+- ID: OrdererMSP
+  MSPDir: crypto-config/ordererOrganizations/vehicular-fl.com/msp
+  Name: OrdererMSP
+  Policies:
+    Admins:
+      Rule: OR('OrdererMSP.admin')
+      Type: Signature
+    Readers:
+      Rule: OR('OrdererMSP.member')
+      Type: Signature
+    Writers:
+      Rule: OR('OrdererMSP.member')
+      Type: Signature
+Profiles:
+  VehicularFLChannel:
+    Consortium: VehicularFLConsortium
+    <<: *ChannelDefaults
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *RSU1
+        - *RSU2
+        - *RSU3
+      Capabilities:
+        <<: *ApplicationCapabilities
+  VehicularFLOrdererGenesis:
+    <<: *ChannelDefaults
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrdererOrg
+    Consortiums:
+      VehicularFLConsortium:
+        Organizations:
+          - *RSU1
+          - *RSU2
+          - *RSU3

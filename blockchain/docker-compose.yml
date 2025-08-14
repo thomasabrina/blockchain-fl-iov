@@ -1,0 +1,290 @@
+networks:
+  vehicular-fl:
+    name: vehicular-fl
+services:
+  orderer0-vehicular-fl-com:
+    command: orderer
+    container_name: orderer0.vehicular-fl.com
+    environment:
+    - FABRIC_LOGGING_SPEC=INFO
+    - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+    - ORDERER_GENERAL_LISTENPORT=7050
+    - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+    - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+    - ORDERER_GENERAL_TLS_ENABLED=true
+    - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_GENERAL_BOOTSTRAPMETHOD=none
+    - ORDERER_CHANNELPARTICIPATION_ENABLED=true
+    - ORDERER_ADMIN_TLS_ENABLED=true
+    - ORDERER_ADMIN_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_ADMIN_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:7053
+    image: hyperledger/fabric-orderer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7050:7050
+    - 7053:7053
+    volumes:
+    - ./crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer0.vehicular-fl.com/msp:/var/hyperledger/orderer/msp
+    - ./crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer0.vehicular-fl.com/tls:/var/hyperledger/orderer/tls
+    - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+  orderer1-vehicular-fl-com:
+    command: orderer
+    container_name: orderer1.vehicular-fl.com
+    environment:
+    - FABRIC_LOGGING_SPEC=INFO
+    - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+    - ORDERER_GENERAL_LISTENPORT=7050
+    - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+    - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+    - ORDERER_GENERAL_TLS_ENABLED=true
+    - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_GENERAL_BOOTSTRAPMETHOD=none
+    - ORDERER_CHANNELPARTICIPATION_ENABLED=true
+    - ORDERER_ADMIN_TLS_ENABLED=true
+    - ORDERER_ADMIN_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_ADMIN_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:7053
+    image: hyperledger/fabric-orderer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7058:7050
+    - 7059:7053
+    volumes:
+    - ./crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer1.vehicular-fl.com/msp:/var/hyperledger/orderer/msp
+    - ./crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer1.vehicular-fl.com/tls:/var/hyperledger/orderer/tls
+    - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+  orderer2-vehicular-fl-com:
+    command: orderer
+    container_name: orderer2.vehicular-fl.com
+    environment:
+    - FABRIC_LOGGING_SPEC=INFO
+    - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+    - ORDERER_GENERAL_LISTENPORT=7050
+    - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+    - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+    - ORDERER_GENERAL_TLS_ENABLED=true
+    - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_GENERAL_BOOTSTRAPMETHOD=none
+    - ORDERER_CHANNELPARTICIPATION_ENABLED=true
+    - ORDERER_ADMIN_TLS_ENABLED=true
+    - ORDERER_ADMIN_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+    - ORDERER_ADMIN_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+    - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:7053
+    image: hyperledger/fabric-orderer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7056:7050
+    - 7057:7053
+    volumes:
+    - ./crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer2.vehicular-fl.com/msp:/var/hyperledger/orderer/msp
+    - ./crypto-config/ordererOrganizations/vehicular-fl.com/orderers/orderer2.vehicular-fl.com/tls:/var/hyperledger/orderer/tls
+    - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+  peer0-rsu1-vehicular-fl-com:
+    command: peer node start
+    container_name: peer0.rsu1.vehicular-fl.com
+    environment:
+    - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+    - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=vehicular-fl
+    - FABRIC_LOGGING_SPEC=INFO
+    - CORE_PEER_ID=peer0.rsu1.vehicular-fl.com
+    - CORE_PEER_ADDRESS=peer0.rsu1.vehicular-fl.com:7051
+    - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+    - CORE_PEER_CHAINCODEADDRESS=peer0.rsu1.vehicular-fl.com:7052
+    - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.rsu1.vehicular-fl.com:7051
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.rsu1.vehicular-fl.com:7051
+    - CORE_PEER_LOCALMSPID=RSU1MSP
+    - CORE_PEER_TLS_ENABLED=true
+    - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+    - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+    - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+    - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    image: hyperledger/fabric-peer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7051:7051
+    volumes:
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/rsu1.vehicular-fl.com/peers/peer0.rsu1.vehicular-fl.com/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/rsu1.vehicular-fl.com/peers/peer0.rsu1.vehicular-fl.com/tls:/etc/hyperledger/fabric/tls
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+  peer0-rsu2-vehicular-fl-com:
+    command: peer node start
+    container_name: peer0.rsu2.vehicular-fl.com
+    environment:
+    - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+    - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=vehicular-fl
+    - FABRIC_LOGGING_SPEC=INFO
+    - CORE_PEER_ID=peer0.rsu2.vehicular-fl.com
+    - CORE_PEER_ADDRESS=peer0.rsu2.vehicular-fl.com:7051
+    - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+    - CORE_PEER_CHAINCODEADDRESS=peer0.rsu2.vehicular-fl.com:7052
+    - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.rsu2.vehicular-fl.com:7051
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.rsu2.vehicular-fl.com:7051
+    - CORE_PEER_LOCALMSPID=RSU2MSP
+    - CORE_PEER_TLS_ENABLED=true
+    - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+    - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+    - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+    - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    image: hyperledger/fabric-peer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7061:7051
+    volumes:
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/rsu2.vehicular-fl.com/peers/peer0.rsu2.vehicular-fl.com/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/rsu2.vehicular-fl.com/peers/peer0.rsu2.vehicular-fl.com/tls:/etc/hyperledger/fabric/tls
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+  peer0-rsu3-vehicular-fl-com:
+    command: peer node start
+    container_name: peer0.rsu3.vehicular-fl.com
+    environment:
+    - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+    - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=vehicular-fl
+    - FABRIC_LOGGING_SPEC=INFO
+    - CORE_PEER_ID=peer0.rsu3.vehicular-fl.com
+    - CORE_PEER_ADDRESS=peer0.rsu3.vehicular-fl.com:7051
+    - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+    - CORE_PEER_CHAINCODEADDRESS=peer0.rsu3.vehicular-fl.com:7052
+    - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.rsu3.vehicular-fl.com:7051
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.rsu3.vehicular-fl.com:7051
+    - CORE_PEER_LOCALMSPID=RSU3MSP
+    - CORE_PEER_TLS_ENABLED=true
+    - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+    - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+    - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+    - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    image: hyperledger/fabric-peer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7071:7051
+    volumes:
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/rsu3.vehicular-fl.com/peers/peer0.rsu3.vehicular-fl.com/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/rsu3.vehicular-fl.com/peers/peer0.rsu3.vehicular-fl.com/tls:/etc/hyperledger/fabric/tls
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+  peer1-rsu1-vehicular-fl-com:
+    command: peer node start
+    container_name: peer1.rsu1.vehicular-fl.com
+    environment:
+    - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+    - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=vehicular-fl
+    - FABRIC_LOGGING_SPEC=INFO
+    - CORE_PEER_ID=peer1.rsu1.vehicular-fl.com
+    - CORE_PEER_ADDRESS=peer1.rsu1.vehicular-fl.com:7051
+    - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+    - CORE_PEER_CHAINCODEADDRESS=peer1.rsu1.vehicular-fl.com:7052
+    - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.rsu1.vehicular-fl.com:7051
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.rsu1.vehicular-fl.com:7051
+    - CORE_PEER_LOCALMSPID=RSU1MSP
+    - CORE_PEER_TLS_ENABLED=true
+    - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+    - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+    - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+    - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    image: hyperledger/fabric-peer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7052:7051
+    volumes:
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/rsu1.vehicular-fl.com/peers/peer1.rsu1.vehicular-fl.com/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/rsu1.vehicular-fl.com/peers/peer1.rsu1.vehicular-fl.com/tls:/etc/hyperledger/fabric/tls
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+  peer1-rsu2-vehicular-fl-com:
+    command: peer node start
+    container_name: peer1.rsu2.vehicular-fl.com
+    environment:
+    - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+    - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=vehicular-fl
+    - FABRIC_LOGGING_SPEC=INFO
+    - CORE_PEER_ID=peer1.rsu2.vehicular-fl.com
+    - CORE_PEER_ADDRESS=peer1.rsu2.vehicular-fl.com:7051
+    - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+    - CORE_PEER_CHAINCODEADDRESS=peer1.rsu2.vehicular-fl.com:7052
+    - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.rsu2.vehicular-fl.com:7051
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.rsu2.vehicular-fl.com:7051
+    - CORE_PEER_LOCALMSPID=RSU2MSP
+    - CORE_PEER_TLS_ENABLED=true
+    - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+    - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+    - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+    - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    image: hyperledger/fabric-peer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7062:7051
+    volumes:
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/rsu2.vehicular-fl.com/peers/peer1.rsu2.vehicular-fl.com/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/rsu2.vehicular-fl.com/peers/peer1.rsu2.vehicular-fl.com/tls:/etc/hyperledger/fabric/tls
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+  peer1-rsu3-vehicular-fl-com:
+    command: peer node start
+    container_name: peer1.rsu3.vehicular-fl.com
+    environment:
+    - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+    - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=vehicular-fl
+    - FABRIC_LOGGING_SPEC=INFO
+    - CORE_PEER_ID=peer1.rsu3.vehicular-fl.com
+    - CORE_PEER_ADDRESS=peer1.rsu3.vehicular-fl.com:7051
+    - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+    - CORE_PEER_CHAINCODEADDRESS=peer1.rsu3.vehicular-fl.com:7052
+    - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.rsu3.vehicular-fl.com:7051
+    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.rsu3.vehicular-fl.com:7051
+    - CORE_PEER_LOCALMSPID=RSU3MSP
+    - CORE_PEER_TLS_ENABLED=true
+    - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+    - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+    - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+    - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    image: hyperledger/fabric-peer:2.4
+    networks:
+    - vehicular-fl
+    ports:
+    - 7072:7051
+    volumes:
+    - /var/run/:/host/var/run/
+    - ./crypto-config/peerOrganizations/rsu3.vehicular-fl.com/peers/peer1.rsu3.vehicular-fl.com/msp:/etc/hyperledger/fabric/msp
+    - ./crypto-config/peerOrganizations/rsu3.vehicular-fl.com/peers/peer1.rsu3.vehicular-fl.com/tls:/etc/hyperledger/fabric/tls
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+version: '3.7'

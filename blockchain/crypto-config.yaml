@@ -1,0 +1,26 @@
+OrdererOrgs:
+- Domain: vehicular-fl.com
+  Name: Orderer
+  Specs:
+  - Hostname: orderer0
+  - Hostname: orderer1
+  - Hostname: orderer2
+PeerOrgs:
+- Domain: rsu1.vehicular-fl.com
+  Name: RSU1
+  Template:
+    Count: 2
+  Users:
+    Count: 1
+- Domain: rsu2.vehicular-fl.com
+  Name: RSU2
+  Template:
+    Count: 2
+  Users:
+    Count: 1
+- Domain: rsu3.vehicular-fl.com
+  Name: RSU3
+  Template:
+    Count: 2
+  Users:
+    Count: 1
